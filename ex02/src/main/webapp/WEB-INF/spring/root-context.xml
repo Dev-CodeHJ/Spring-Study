@@ -10,7 +10,10 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 	    <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-	    <property name="jdbcUrl" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/scott?useSSL=false&amp;useUnicode=true&amp;serverTimezone=UTC"/>
+	    <!--
+	    <property name="jdbcUrl" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/scott?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&serverTimezone=UTC"/>
+    	-->
+    	<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/scott?useSSL=false&amp;useUnicode=true&amp;serverTimezone=UTC"/>
 	    <property name="username" value="root"/>
 	    <property name="password" value="ezen1234"/>
     </bean>
