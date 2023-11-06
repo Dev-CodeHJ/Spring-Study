@@ -76,25 +76,23 @@
         <!-- /#page-wrapper -->
     <%@include file="../includes/footer.jsp" %>
     <script type="text/javascript">
-    	$(document).ready(
-   			function(){
-   				var formObj = $("form");
-   				
-   				$('button').on("click", function(e) {
-   					e.preventDefault();
-   					var operation = $(this).data("oper");
-   					console.log(operation);
-   					
-   					if(operation === 'remove') {
-   						formObj.attr("action", "/board/remove");
-   					} else if(operation === 'list') {
-   						self.location="/board/list";
-   						return;
-   					}
-   					formObj.submit();
-   				});
-   			}
-		);
+    	$(document).ready(function(){
+ 			var formObj = $("form");
+ 				
+ 			$('button').on("click", function(e) {
+ 				e.preventDefault();
+ 				var operation = $(this).data("oper");
+ 				console.log(operation);
+ 				
+ 				if(operation === 'remove') {
+ 					formObj.attr("action", "/board/remove");
+ 				} else if(operation === 'list') {
+ 					formObj.attr("action", "/board/list").attr("method", "get");
+ 					formObj.empty();
+ 				}
+ 				formObj.submit();
+ 			});
+		});
     </script>
 </body>
 </html>
