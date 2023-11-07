@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			values(#{bno}, #{reply}, #{replyer})
 		</insert>
 		
-		<select id="read" resultType="org.zerock.domain.ReplyVO">
+		<select id="findByRno" resultType="org.zerock.domain.ReplyVO">
 			select * from tbl_reply where rno = #{rno}
 		</select>
 		
@@ -21,4 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<update id="update">
 			update tbl_reply set reply = #{reply}, updateDate = sysdate() where rno = #{rno}
 		</update>
+		
+		<select id="findAllReply" resultType="org.zerock.domain.ReplyVO">
+			select * from tbl_reply where bno = #{bno} order by rno asc
+		</select>
 </mapper>

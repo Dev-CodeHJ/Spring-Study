@@ -1,6 +1,6 @@
 package org.zerock.mapper;
 
-import java.util.stream.IntStream;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,14 +19,14 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class ReplyMapperTest {
 
-	private Long[] bnoArr = {4L, 5L, 6L, 7L, 8L};
+//	private Long[] bnoArr = {4L, 5L, 6L, 7L, 8L};
 	
 	@Setter(onMethod_ = @Autowired)
 	private ReplyMapper mapper;
 	
-//	@Test public void testRead() {
+//	@Test public void testFindByRno() {
 //		Long targetRno = 6L;
-//		ReplyVO vo = mapper.read(targetRno);
+//		ReplyVO vo = mapper.findByRno(targetRno);
 //		log.info(vo);
 //	}
 //	
@@ -50,13 +50,20 @@ public class ReplyMapperTest {
 //	public void testMapper() {
 //		log.info(mapper);
 //	}
+//	
+//	@Test
+//	public void testUpdate() {
+//		Long targetRno = 3L;
+//		ReplyVO vo = mapper.findByRno(targetRno);
+//		vo.setReply("Update Reply");
+//		int count = mapper.update(vo);
+//		log.info("update count : " + count);
+//	}
 	
 	@Test
-	public void testUpdate() {
-		Long targetRno = 3L;
-		ReplyVO vo = mapper.read(targetRno);
-		vo.setReply("Update Reply");
-		int count = mapper.update(vo);
-		log.info("update count : " + count);
+	public void testFindAllReply() {
+		Long targetBno = 6L;
+		List<ReplyVO> rnoList = mapper.findAllReply(targetBno);
+		log.info(rnoList);
 	}
 }
