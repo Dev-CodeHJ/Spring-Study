@@ -58,8 +58,35 @@
 		        <!-- /.panel -->
 		    </div>
 		    <!-- /.col-lg-6 -->
-                </div>
-            <!-- /.row -->
+		    <div class="row">
+		        <div class="col-lg-12">
+		            <div class="panel panel-default">
+		                <div class="panel-heading">
+		                	<i class="fa fa-comments fa-fw"></i> Reply
+		                </div>
+		                <!-- /.panel-heading -->
+		                
+		                <div class="panel-body">
+		                	<ul class="chat">
+		                		<li class="left clearfix" data-rno="12">
+		                			<div>
+		                				<div class="header">
+		                					<strong class="primary-font">user00</strong>
+		                					<small class="pull-right text-muted">2018-01-01 13:13</small>
+		                				</div>
+		                				<p>Good job!</p>
+		                			</div>
+		                		</li>
+		                	</ul>
+		                </div>
+		                <!-- /.table-responsive -->
+		            </div>
+		            <!-- /.panel-body -->
+		        </div>
+		        <!-- /.panel -->
+		    </div>
+          </div>
+          <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
     <%@include file="../includes/footer.jsp" %>
@@ -69,10 +96,58 @@
     	console.log("JS TEST");
     	
     	var bnoValue = '<c:out value="${board.bno}"/>';
+    	var replyUL = $(".chat");
     	
+    	function showList() {
+    		replyService.replyList({bno:bnoValue}, function(list) {
+    			var str = "";
+    			if(list == null || list.length == 0) {
+    				replyUL.html("");
+    				return;
+    			}
+    			for(var i = 0, len = list.length || 0; i < len; i++) {
+    				str += "<li class='left clearfix' data-rno='"+list[i].rno+"'><div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong><small class='pull-right text-muted'>"+list[i].replyDate+"</small></div><p>"+list[i].reply+"</p></div></li>";
+    			}
+    			replyUL.html(str);
+    		});
+    	}
+    	
+    	//for replyService add test
     	replyService.add({reply:"JS TEST", replyer:"tester", bno:bnoValue}, function(result){
     			alert("RESULT : " + result);
     		});
+    	
+    	//for replyList test
+    	replyService.replyList({bno:bnoValue}, function(list){
+    		for(var i = 0, len = list.length||0; i < len; i++) {
+    			console.log(list[i]);
+    		}
+   		});
+    	
+    	//댓글 삭제 테스트
+    	replyService.remove(29, function(count) {
+    		console.log(count);
+    		
+    		if(count === "success") {
+    			alert("REMOVED");
+    		}
+    	}, function(err) {
+    		alert('ERROR....');
+    	});
+    	
+    	//댓글 수정
+    	replyService.update({
+    		rno : 22,
+    		bno : bnoValue,
+    		reply : "Modified"
+    	}, function(result) {
+    		alert("수정 완료....");
+    	});
+    	
+    	//특정 번호 댓글 조회
+    	replyService.get(3, function(data) {
+    		console.log(data);
+    	});
     </script>
     <script type="text/javascript">
     	$(document).ready(function() {
