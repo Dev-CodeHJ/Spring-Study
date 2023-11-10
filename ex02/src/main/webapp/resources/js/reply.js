@@ -92,11 +92,11 @@ var replyService = (function(){
 		var str = "";
 		
 		if(gap < (1000 * 60 * 60 * 24)) {
-			var hh = dateObj.getHours(); 
-			var mm = dateObj.getMinutes();
-			var ss = dateObj.getSeconds(); 
+			var hh = ('0' + dateObj.getHours()).slice(-2); 
+			var mm = ('0' + dateObj.getMinutes()).slice(-2);
+			var ss = ('0' + dateObj.getSeconds()).slice(-2); 
 			
-			return [(hh > 9 ? '' : '0') + hh, ':', (mm > 9 ? '' : '0')  + mm, ':', (ss > 9 ? '' : '0') + ss].join('');
+			return [hh + ':' + mm  + ':' + ss].join('');
 		} else {
 			var yy = dateObj.getFullYear();
 			var mm = dateObj.getMonth() + 1;
